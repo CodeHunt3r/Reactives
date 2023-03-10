@@ -26,7 +26,7 @@ using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 
 
-// Try Create DB
+// Try Create DB else catch Exception
 try
 {
     var context = services.GetRequiredService<DataContext>(); 
