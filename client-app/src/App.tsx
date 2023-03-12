@@ -1,5 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Header } from 'semantic-ui-react';
+import Button from 'semantic-ui-react/dist/commonjs/elements/Button';
+import List from 'semantic-ui-react/dist/commonjs/elements/List';
 import './App.css';
 function App() {
     const [activites, setActivites] = useState([]);
@@ -8,22 +11,20 @@ function App() {
     useEffect( () => {
       axios.get('http://localhost:5000/api/activities')
         .then(response => {
-          console.log(response);
           setActivites(response.data)
         })
     }, [])
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <ul>
+    <div>
+      <Header as='h2' icon='users' content='Reactivities'/>
+        <List>
           {activites.map((activity: any) => (
-            <li key={activity.id}>
+            <List.Item key={activity.id}>
               {activity.title}
-            </li>
+            </List.Item>
           ))}
-        </ul>
-      </header>
+        </List>
     </div>
   );
 }
