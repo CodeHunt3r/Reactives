@@ -1,5 +1,8 @@
+using Application.Activities;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,9 +23,11 @@ builder.Services.AddCors(opt =>
 {
     opt.AddPolicy("CorsPolicy", policy =>
     {
-        policy.AllowAnyMethod().AllowAnyMethod().WithOrigins("http://localhost:3000");
+        policy.AllowAnyMethod().WithOrigins("http://localhost:3000");
     });
 });
+
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<List.Handler>());
 
 
 var app = builder.Build();
