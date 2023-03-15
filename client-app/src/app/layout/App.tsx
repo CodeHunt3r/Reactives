@@ -1,15 +1,14 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Header } from 'semantic-ui-react';
-import Button from 'semantic-ui-react/dist/commonjs/elements/Button';
-import List from 'semantic-ui-react/dist/commonjs/elements/List';
-import './App.css';
+import { Header, List } from 'semantic-ui-react';
+import { Activity } from '../models/activity';
+
 function App() {
-    const [activites, setActivites] = useState([]);
+    const [activites, setActivites] = useState<Activity[]>([]);
 
     //Callback with Arrow Function
     useEffect( () => {
-      axios.get('http://localhost:5000/api/activities')
+      axios.get<Activity[]>('http://localhost:5000/api/activities')
         .then(response => {
           setActivites(response.data)
         })
@@ -19,7 +18,7 @@ function App() {
     <div>
       <Header as='h2' icon='users' content='Reactivities'/>
         <List>
-          {activites.map((activity: any) => (
+          {activites.map((activity) => (
             <List.Item key={activity.id}>
               {activity.title}
             </List.Item>
