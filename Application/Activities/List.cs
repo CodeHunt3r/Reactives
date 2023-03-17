@@ -5,7 +5,10 @@ using Persistence;
 
 
 namespace Application.Activities
-{
+{   
+    /// <summary>
+    /// Retruns all Activities from the DB
+    /// </summary>
     public class List
     {
         public class Query : IRequest<List<Activity>> {}
