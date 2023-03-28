@@ -5,10 +5,11 @@ import { Activity } from "../../../app/models/activity";
 interface Props {
     activity: Activity
     cancelSelectActivity: () => void;
+    openForm: (id: string) => void;
 }
 
 
-export default function ActivityDetails({ activity, cancelSelectActivity }: Props) {
+export default function ActivityDetails({ activity, cancelSelectActivity, openForm }: Props) {
     return (
         <Card>
             <Image src={`/assets/categoryImages/${activity.category}.jpg`} />
@@ -22,10 +23,11 @@ export default function ActivityDetails({ activity, cancelSelectActivity }: Prop
                 </Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <ButtonGroup widths='2'>
-                    <Button basic color='blue' content='Edit' />
-                    <Button onClick={cancelSelectActivity} basic color='grey' content='Cancel' />
-                </ButtonGroup>
+
+
+                <Button onClick={() => openForm(activity.id)} basic color='blue' content='Edit' />
+                <Button onClick={cancelSelectActivity} basic color='grey' content='Cancel' />
+
             </Card.Content>
         </Card>
     )
