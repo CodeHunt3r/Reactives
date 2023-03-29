@@ -1,10 +1,10 @@
-import axios from 'axios';
 import React, { Fragment, useEffect, useState } from 'react';
 import { Container } from 'semantic-ui-react';
 import ActivityDashboard from '../../features/activities/dashboard/ActivityDashboard';
 import { Activity } from '../models/activity';
 import NavBar from './Navbar';
 import { v4 as uuid } from 'uuid';
+import agent from '../api/agent';
 
 
 function App() {
@@ -15,10 +15,7 @@ function App() {
 
   //Callback with Arrow Function
   useEffect(() => {
-    axios.get<Activity[]>('http://localhost:5000/api/activities')
-      .then(response => {
-        setActivites(response.data)
-      })
+    agent.Activities.list().then(response => { setActivites(response) })
   }, [])
 
   function handleSelectActivity(id: string) {
