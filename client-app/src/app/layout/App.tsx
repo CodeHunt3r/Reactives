@@ -15,7 +15,14 @@ function App() {
 
   //Callback with Arrow Function
   useEffect(() => {
-    agent.Activities.list().then(response => { setActivites(response) })
+    agent.Activities.list().then(response => {
+      let activites: Activity[] = [];
+      response.forEach(activity => {
+        activity.date = activity.date.split('T')[0]
+        activites.push(activity)
+      })
+      setActivites(activites)
+    })
   }, [])
 
   function handleSelectActivity(id: string) {
